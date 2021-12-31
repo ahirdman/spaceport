@@ -30,14 +30,14 @@ axios.get('https://spaceflightnow.com/launch-schedule/').then(response => {
       info,
     });
   });
+});
 
-  app.get('/', (req, res) => {
-    res.json('Startpage');
-  });
+app.get('/', (req, res) => {
+  res.json('Startpage');
+});
 
-  app.get('/launches', (req, res) => {
-    res.json(launches);
-  });
+app.get('/all', (req, res) => {
+  res.json(launches);
 });
 
 app.listen(PORT, () => {
