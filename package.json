@@ -1,5 +1,5 @@
 {
-  "name": "space launch",
+  "name": "space-launch",
   "version": "1.0.0",
   "description": "An api to get planned spaceport launches",
   "main": "app.js",
