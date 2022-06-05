@@ -4,7 +4,8 @@
   "description": "An api to get planned spaceport launches",
   "main": "src/server.ts",
   "scripts": {
-    "start": "nodemon src/server.ts"
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon src/server.ts"
   },
   "keywords": [],
   "author": "",
