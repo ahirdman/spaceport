@@ -1,12 +1,12 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import { ILaunchData } from '../common/interface';
 
 const launches: ILaunchData[] = [];
 
 axios.get('https://spaceflightnow.com/launch-schedule/').then(response => {
   const html = response.data;
-  const $ = cheerio.load(html);
+  const $ = load(html);
 
   $('div.datename', html).each(function () {
     const date = $(this).children('.launchdate').text();

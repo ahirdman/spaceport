@@ -1,6 +1,6 @@
 import axios from 'axios';
 import express, { Request, Response } from 'express';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import { ILaunchData } from '../common/interface';
 
 export const locationRouter = express.Router();
@@ -12,7 +12,7 @@ locationRouter.get('/:location', (req: Request, res: Response) => {
 
   axios.get('https://spaceflightnow.com/launch-schedule/').then(response => {
     const html = response.data;
-    const $ = cheerio.load(html);
+    const $ = load(html);
     const launchesLocation: ILaunchData[] = [];
 
     $(`div.missiondata:contains("${capitalQuery}")`, html).each(function () {

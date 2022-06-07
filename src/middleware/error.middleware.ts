@@ -9,5 +9,5 @@ export const errorHandler = (
 ) => {
   const status = error.statusCode || error.status || 500;
 
-  response.status(status).json(error);
+  response.status(status).json(error.message);
 };
