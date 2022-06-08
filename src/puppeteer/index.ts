@@ -3,10 +3,12 @@ import puppeteer from 'puppeteer';
 interface ILaunchData {
   launchDate: string;
   mission: string;
-  brief: string;
+  description: string;
 }
 
 (async () => {
+  const nasaLaunches: ILaunchData[] = [];
+
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -16,30 +18,36 @@ interface ILaunchData {
 
     const cards = await page.$$('#ember14 > div > div.launch-event');
 
-    const nasaLaunches: ILaunchData[] = [];
-
     for (const card of cards) {
+      const dateEl = await card.$('div.ember-view > div.date');
+      const dateFull: string | undefined = await (
+        await dateEl?.getProperty('innerText')
+      )?.jsonValue();
+      const date = dateFull?.replace(/no earlier than: |date: /gi, '');
+
       const missionEl = await card.$('div.launch-info > div.title');
-      const mission = await (
+      const missionFull: string | undefined = await (
         await missionEl?.getProperty('innerText')
       )?.jsonValue();
+      const mission = missionFull?.replace(/mission: /gi, '');
 
-      const dateEl = await card.$('div.ember-view > div.date');
-      const date = await (await dateEl?.getProperty('innerText'))?.jsonValue();
-
-      const briefEl = await card.$('div.launch-info > div.description > p');
-      const brief = await (
-        await briefEl?.getProperty('innerText')
+      const descriptionEl = await card.$(
+        'div.launch-info > div.description > p'
+      );
+      const description = await (
+        await descriptionEl?.getProperty('innerText')
       )?.jsonValue();
 
       nasaLaunches.push({
         launchDate: typeof date === 'string' ? date : 'unknown',
         mission: typeof mission === 'string' ? mission : 'unknown',
-        brief: typeof brief === 'string' ? brief : 'unknown',
+        description: typeof description === 'string' ? description : 'unknown',
       });
     }
     await browser.close();
   } catch (error) {
     console.log('Error:', error);
+  } finally {
+    console.log(nasaLaunches);
   }
 })();
