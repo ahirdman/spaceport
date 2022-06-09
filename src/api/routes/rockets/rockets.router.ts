@@ -1,14 +1,13 @@
 import axios from 'axios';
 import express, { Request, Response } from 'express';
 import { load } from 'cheerio';
-import { ILaunchData } from '../common/interface';
+import { ILaunchData } from '../../common/interface';
 
 export const rocketRouter = express.Router();
 
 rocketRouter.get('/:rocket', (req: Request, res: Response) => {
   const rocketParam = req.params.rocket;
-  const capitalQuery =
-    rocketParam.charAt(0).toUpperCase() + rocketParam.slice(1);
+  const capitalQuery = rocketParam.charAt(0).toUpperCase() + rocketParam.slice(1);
 
   axios.get('https://spaceflightnow.com/launch-schedule/').then(response => {
     const html = response.data;

@@ -1,9 +1,9 @@
 import express, { Application } from 'express';
-import { launchRouter } from './launches/launches.router';
-import { locationRouter } from './locations/locations.router';
+import { launchRouter } from './routes/launches/launches.router';
+import { locationRouter } from './routes/locations/locations.router';
 import { notFoundHandler } from './middleware/404.middleware';
 import { errorHandler } from './middleware/error.middleware';
-import { rocketRouter } from './rockets/rockets.router';
+import { rocketRouter } from './routes/rockets/rockets.router';
 
 const app: Application = express();
 
