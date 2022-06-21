@@ -1,7 +1,4 @@
-// Use parser on return value of scraper functions
-// Export value to db
-
-import { getLaunchData, insertLaunchData } from '../db';
+import { insertLaunchData } from '../db';
 import { ILaucnhData } from './data.interface';
 import { getAllSchedules } from './data.scraper';
 
@@ -19,9 +16,4 @@ const insertData = async () => {
   } catch (error) {
     console.log(error);
   }
-};
-
-const getData = async () => {
-  const data = await getLaunchData(['Artemis%']);
-  console.log(data);
 };

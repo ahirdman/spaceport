@@ -5,9 +5,9 @@ const pool = new Pool(dbConfig);
 
 export const query = async (query: any) => {
   try {
-    const { rows } = await pool.query(query);
-    return rows;
+    const res = await pool.query(query);
+    return res.rows;
   } catch (err: any) {
-    console.log(err);
+    throw new Error();
   }
 };

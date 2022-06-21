@@ -1,6 +1,8 @@
-import * as db from './../../../db';
+import { query } from '../../../db/db';
 
-export const getAllLocations = async (): Promise<any> => {
-  const locations = await db.getAllLocations();
-  return locations;
+const GET_ALL_LOCATIONS = 'SELECT * FROM locations';
+
+export const getAllLocations = async (): Promise<any[]> => {
+  const data = await query(GET_ALL_LOCATIONS);
+  return data;
 };
