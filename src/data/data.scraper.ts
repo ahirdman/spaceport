@@ -50,17 +50,6 @@ const getNASA = async () => {
         missionDescription: typeof description === 'string' ? description : 'unknown',
         imageUrl: typeof imageUrl === 'string' ? imageUrl : 'unkown',
       });
-      // nasaLaunches.push({
-      //   launchDate: typeof date === 'string' ? date : 'unknown',
-      //   launchSite: location ? location : { location: 'unknown' },
-      //   mission: {
-      //     name: typeof missionName === 'string' ? missionName : 'unknown',
-      //     description: typeof description === 'string' ? description : 'unknown',
-      //   },
-      //   image: {
-      //     url: typeof imageUrl === 'string' ? imageUrl : 'unkown',
-      //   },
-      // });
     }
     await browser.close();
   } catch (error) {

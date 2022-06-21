@@ -1,28 +1,8 @@
-import axios from 'axios';
-import { load } from 'cheerio';
-import { ILaunchData } from '../common/interface';
+import { query } from '../../../db/db';
 
-const launches: ILaunchData[] = [];
+const GET_ALL_LAUNCHES = 'SELECT lan.*, to_json(loc) "launch_site" FROM launches lan LEFT JOIN locations loc ON lan.launch_site = loc.site_id';
 
-axios.get('https://spaceflightnow.com/launch-schedule/').then(response => {
-  const html = response.data;
-  const $ = load(html);
-
-  $('div.datename', html).each(function () {
-    const date = $(this).children('.launchdate').text();
-    const mission = $(this).children('.mission').text().split(' • ')[1];
-    const rocket = $(this).children('.mission').text().split(' • ')[0];
-    const site = $(this).next().text().split('Launch site: ')[1];
-    const info = $(this).next().next().text().split(' [')[0];
-
-    launches.push({
-      date,
-      mission,
-      rocket,
-      site,
-      info,
-    });
-  });
-});
-
-export const getAllLaunches = () => launches;
+export const getAllLaunches = async (): Promise<any[]> => {
+  const data = await query(GET_ALL_LAUNCHES);
+  return data;
+};
