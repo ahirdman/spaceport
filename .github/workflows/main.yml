@@ -11,6 +11,22 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postares:
+        image: postgres:latest
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmdpq_isready
+          --health-interval10s
+          -_health-timeout 5s
+          --health-retries5
 
     steps:
       - name: Check out code
@@ -24,14 +40,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: ENV test
-        run: echo ${{ secrets.DB_PORT }}
-
       - name: Run tests
         run: npm test
-        env:
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_PORT: ${{ secrets.DB_PORT }}
