@@ -17,7 +17,6 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_USER: ${{ secrets.DB_USER }}
-          DB_HOST: ${{ secrets.DB_HOST }}
           DB_NAME: ${{ secrets.DB_NAME }}
         ports:
           - 5432:5432
@@ -27,6 +26,9 @@ jobs:
           --health-interval10s
           -_health-timeout 5s
           --health-retries5
+
+    env:
+      DB_HOST: ${{ secrets.DB_HOST }}
 
     steps:
       - name: Check out code
