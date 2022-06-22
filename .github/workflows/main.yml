@@ -22,7 +22,6 @@ jobs:
           - 5432:5432
         # Set health checks to wait until postgres has started
         options: >-
-          --health-cmdpq_isready
           --health-interval10s
           -_health-timeout 5s
           --health-retries5
