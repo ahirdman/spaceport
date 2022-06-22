@@ -9,6 +9,8 @@ jobs:
     # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
 
+    container: node:14-alpine
+
     # Service containers to run with `runner-job`
     services:
       # Label used to access the service container
@@ -17,7 +19,7 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_PASSWORD: postgres
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -46,8 +48,8 @@ jobs:
         # a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_HOST: localhost
           # The default PostgreSQL port
           DB_PORT: 5432
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: postgres
+          DB_NAME: postgres
