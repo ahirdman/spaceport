@@ -21,10 +21,10 @@ jobs:
         ports:
           - 5432:5432
         # Set health checks to wait until postgres has started
-        options: >-
-          --health-interval10s
-          -_health-timeout 5s
-          --health-retries5
+        # options: >-
+        #   --health-interval10s
+        #   -_health-timeout 5s
+        #   --health-retries5
 
     env:
       DB_HOST: ${{ secrets.DB_HOST }}
