@@ -5,7 +5,7 @@ import { insertData } from './../src/data/index';
 
 describe('API - "Rockets"', () => {
   if (process.env.NODE_ENV === 'ci') {
-    insertData();
+    console.log('howdy console');
   }
 
   describe('all', () => {
