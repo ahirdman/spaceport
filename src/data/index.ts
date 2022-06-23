@@ -2,7 +2,7 @@ import { insertLaunchData } from '../db';
 import { ILaucnhData } from './data.interface';
 import { getAllSchedules } from './data.scraper';
 
-const insertData = async () => {
+export const insertData = async () => {
   try {
     const data = await getAllSchedules();
 
