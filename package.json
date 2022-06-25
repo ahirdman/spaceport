@@ -8,6 +8,7 @@
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "test": "mocha -r ts-node/register test/**.test.ts",
+    "docker:start": "docker compose up -e POSTGRES_PASSWORD=password ",
     "scrape": "ts-node src/data/data.scraper.ts",
     "insert": "ts-node src/data/index.ts",
     "db": "ts-node src/db/index.ts"

@@ -1,15 +1,9 @@
 import app from '../src/api/app';
 import request from 'supertest';
-import { assert, expect } from 'chai';
-import { insertData } from './../src/data/index';
+import { assert } from 'chai';
 
 describe('API - "Rockets"', () => {
   describe('all', () => {
-    it('notes the node_env', () => {
-      const env = process.env.NODE_ENV === 'ci';
-      assert.equal(env, true);
-    });
-
     it('responds with json', done => {
       request(app).get('/api/rockets').expect('Content-Type', /json/).expect(200, done);
     });

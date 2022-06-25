@@ -3,6 +3,9 @@ import format from 'pg-format';
 export const INSERT_DATA =
   'INSERT INTO launches (launch_date, launch_date_set, launch_site, launch_mission, launch_mission_description, launch_image_url) VALUES %L';
 
+export const INSERT_TEST_DATA =
+  'INSERT INTO launches (launch_date, launch_date_set, launch_site, launch_mission, launch_mission_description, launch_image_url) VALUES %L';
+
 export const formatQuery = (text: string, values: any[] | string) => format(text, values);
 
 export const selectObject = (values: string[]) => ({
